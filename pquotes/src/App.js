@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux'
-import './App.css';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 import Quote from './components/Quote.jsx'
 import { getQod } from './actions'
-import { useSelector } from 'react-redux'
-import CircularProgress from '@material-ui/core/CircularProgress';
 
-function App() {
+import CircularProgress from '@material-ui/core/CircularProgress'
+import './App.css'
+
+export default () => {
   const dispatch = useDispatch();
   const isFetched = useSelector(state => state.isFetched)
 
@@ -14,14 +15,9 @@ function App() {
     dispatch(getQod())
   }, [])
 
-  return !isFetched ?
-    <div>
-      <CircularProgress />
-    </div>
-    :
+  return (
     <div className="App">
-      <Quote />
+      {!isFetched ? <CircularProgress /> : <Quote />}
     </div>
+  )
 }
-
-export default App;
